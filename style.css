@@ -1,0 +1,33 @@
+body{
+	background: black;
+	padding: 0;
+	margin: 0;
+}
+
+.border{
+	border: 3px solid white;
+}
+
+.main-roll{
+	height: 100vh;
+	width: 100vw;
+	display: grid;
+	grid-template-rows: 10% 90%;
+	grid-template-columns: 80% 20%;
+	grid-template-areas:
+		"header table"
+		"roll table";
+	grid-gap: 1px;
+}
+
+.main-header{
+	grid-area: header;		
+}
+
+.main-roll-display{
+	grid-area: roll;
+}
+
+.main-table-display{
+	grid-area: table;
+}
