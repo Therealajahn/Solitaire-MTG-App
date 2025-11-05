@@ -2,6 +2,7 @@ body{
 	background: black;
 	padding: 0;
 	margin: 0;
+	color: white;
 }
 
 .border{
@@ -22,12 +23,39 @@ body{
 
 .main-header{
 	grid-area: header;		
+	display: grid;
+	grid-template-columns: 40% 30% 30%;
 }
 
 .main-roll-display{
 	grid-area: roll;
+	display: grid;
+	grid-template-rows: repeat(10,1fr);
 }
 
 .main-table-display{
 	grid-area: table;
+	display: grid;
+	grid-template-rows: repeat(7, 1fr);
+	justify-items: center;
+	align-items: center;
+}
+
+.tables-entry{
+	height: 100%;
+	width: 100%;
+	display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.main-roll-list{
+	width: 90%;
+	height: 90%;
+	list-style: none;
+}
+
+.main-roll-entry{
+	display:grid;
+	grid-template-columns: 20% 80%;
 }
