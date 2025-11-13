@@ -1,4 +1,11 @@
-const deepIQTables = {
+const deepProgress = {
+	currentTable: 1,
+	health: 40,  
+	nextRollMod: 0, 
+	tokens: [],
+};
+
+const deepTables = {
 	"1":{
 		table: [
 			"Do nothing",
@@ -15,7 +22,7 @@ const deepIQTables = {
 				baseStats:[1,1],
 				roll:"token",
 				modifier: -4,
-			},
+			}, 
 		],
 		advancement: 9,
 	},

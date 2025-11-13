@@ -9,18 +9,46 @@ console.log("isarray: ", Array.isArray(deepIQTables));
 //Array: a series of actions to be handled recursively
 //Object: an action for the app to change some data or make a roll 
 //...on another table
-function displayOptions(type){
+
+function displayOptions(action,type?){
 	return type;
+};
+
+function changeTable(action){
+	deepProgress.currentTable += action.modifier;
+};
+
+function createToken(action){
+ const token = {
+		baseStats: action.baseStats,
+		abilities: [],
+	}
+	deepProgress.token.push(token);		 
+}
+
+function executeAction(action){
+	switch(action.type){
+		case "token":
+    	createToken(action);
+		break;
+		case "advance"
+			changeTable(action);
+		break;
+		case "roll-mod":
+			deepProgress.nextRollMod += action.modifier;
+		break;
+	};
+	return action;
 };
 
 function filterActions(action){
 	switch(typeof action){
 		case "string":
-			displayOptions("neutral");		
+			displayOptions(action,"neutral");		
 		break;
 		case "object":
 			if(action instanceof Array){
-				action.forEach(action => executeAction(action));
+				action.forEach(instance => executeAction(instance));
 				break;
 			};
 			executeAction(action);
