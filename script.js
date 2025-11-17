@@ -4,24 +4,6 @@
 //Object: an action for the app to change some data or make a roll 
 //...on another table
 
-function initializeMainRoll(){
-	//read table one and display it on the DOM
-	//find the main roll element
-	const mainRoll = document.getElementsByClassName("main-roll-display")[0];
-	deepTables[deepProgress.currentTable].table.forEach((action,i) => {
-	//loop over the table to create the elements to fill it
-
-	mainRoll.innerHTML +=
-				`<div class="main-roll-entry ${i + 1} border">
-						<div class="border">
-							<h2 class="number border">${i + 1}</h2>
-						</div>
-						<div class="border">
-							<p class="description border">${getActionText(action)}</p>
-					</div>`;
-	});
-};
-initializeMainRoll();
 
 function getActionText(action) {
 	//TODO: Ill make a function that does the string object and array separation
@@ -103,3 +85,32 @@ function filterActions(action){
 	};
 	//if last action, do an advancement roll
 };
+
+function initializeMainRoll(){
+	//read table one and display it on the DOM
+	//find the main roll element
+	const mainRoll = document.getElementsByClassName("main-roll-display")[0];
+	deepTables[deepProgress.currentTable].table.forEach((action,i) => {
+	//loop over the table to create the elements to fill it
+
+	mainRoll.innerHTML +=
+				`<div class="main-roll-entry ${i + 1} border">
+						<div class="border">
+						  <h2 class="number border">${i + 1}</h2>
+						</div>
+						<div class="border">
+						  <p class="description border">${getActionText(action)}</p>
+				  </div>`;
+	});
+};
+initializeMainRoll();
+
+function detectRollClicked() {
+	const rollbutton = document.getElementsByClassName("main-header")[0];
+	rollbutton.addEventListener("click",event => {
+   console.log("roll: ",roll(10));				
+	 const uiActionList = document.getElementsByClassName("main-roll-entry"); 
+	 //highlight the action number affected, apply the class to it 
+	});
+}
+detectRollClicked();
