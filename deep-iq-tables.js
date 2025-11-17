@@ -1,7 +1,8 @@
 const deepProgress = {
 	currentTable: 1,
 	health: 40,  
-	nextRollMod: 0, 
+	beginningTurn:true,
+	firstRollMod: 0, 
 	tokens: [],
 };
 
@@ -18,9 +19,9 @@ const deepTables = {
 			"Do nothing",
 			"Bury your best creature (you decide)",
 			{
+				type:"token",
 				text:"Put 1/1 creature into play",
 				baseStats:[1,1],
-				roll:"token",
 				modifier: -4,
 			}, 
 		],
@@ -33,26 +34,26 @@ const deepTables = {
 			"Do nothing",
 			"Do nothing",
 			{
-				text:"Put 2/2 creature into play",
 				type:"token",
+				text:"Put 2/2 creature into play",
 				baseStats:[2,2],
 				modifier: 0,
 			},
 			{
-				text:"Put 2/2 creature into play",
 				type:"token",
+				text:"Put 2/2 creature into play",
 				baseStats:[2,2],
 				modifier: 0,
 			},
 			{
-				text:"Put 2/2 creature into play",
 				type:"token",
+				text:"Put 2/2 creature into play",
 				baseStats:[2,2],
 				modifier: 0,
 			},
 			{
-				text:"Move Deep IQ up to Table 4",
 				type:"advance",
+				text:"Move Deep IQ up to Table 4",
 				modifier: 2,
 			},
 			"Remove your best creature from the game (you decide)",
@@ -60,6 +61,6 @@ const deepTables = {
 		],
 		advancement: 9,
 	},
-	"spooky":[],
-	"token":[],
+	token:[],
+	spooky:[],
 }

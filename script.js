@@ -1,21 +1,58 @@
-console.log(deepIQTables);
-function roll(multiplier){
-	return Math.floor(Math.random() * multiplier);
-};
-console.log("roll: ",roll(10));
-console.log("isarray: ", Array.isArray(deepIQTables));
 //it gets the type:
 //String: either a Do nothing or a user action 
 //Array: a series of actions to be handled recursively
 //Object: an action for the app to change some data or make a roll 
 //...on another table
 
-function displayOptions(action,type?){
-	return type;
+function initializeMainRoll(){
+	//read table one and display it on the DOM
+	//find the main roll element
+	const mainRoll = document.getElementsByClassName("main-roll-display")[0];
+	deepTables[deepProgress.currentTable].table.forEach((action,i) => {
+	//loop over the table to create the elements to fill it
+
+	mainRoll.innerHTML +=
+				`<div class="main-roll-entry ${i + 1} border">
+						<div class="border">
+							<h2 class="number border">${i + 1}</h2>
+						</div>
+						<div class="border">
+							<p class="description border">${getActionText(action)}</p>
+					</div>`;
+	});
+};
+initializeMainRoll();
+
+function getActionText(action) {
+	//TODO: Ill make a function that does the string object and array separation
+	let actionText = "";
+	switch(typeof action){
+		case "string":
+ 			actionText = action;
+    break;
+		case "object":
+			actionText = action.text;
+		break;
+	};
+
+	return actionText;
+}
+
+function roll(multiplier){
+	//needs to check beginningTurn  and firstRollMod  
+	//if both are truthy, add firstRollMod to the roll, converting 
+	//it to a ten if over ten
+	
+	return Math.floor(Math.random() * multiplier);
+};
+
+
+function displayOptions(action,type){
 };
 
 function changeTable(action){
 	deepProgress.currentTable += action.modifier;
+	return action;
 };
 
 function createToken(action){
@@ -23,6 +60,15 @@ function createToken(action){
 		baseStats: action.baseStats,
 		abilities: [],
 	}
+	let tokenRoll = deepTables.token[roll(16)];
+	switch(tokenRoll){ 
+	//string
+	//roll-for-effect
+	//reroll-token-chart
+	//reminder-effect(like 16, prompt player to remove their best card)
+	};
+	token.abilties.push(
+	);
 	deepProgress.token.push(token);		 
 }
 
@@ -31,17 +77,18 @@ function executeAction(action){
 		case "token":
     	createToken(action);
 		break;
-		case "advance"
+		case "advance":    
 			changeTable(action);
 		break;
-		case "roll-mod":
-			deepProgress.nextRollMod += action.modifier;
+		case "first-roll-mod":
+			deepProgress.firstRollMod += action.modifier;
 		break;
 	};
 	return action;
 };
 
 function filterActions(action){
+	//TODO: Ill make a function that does the string object and array separation
 	switch(typeof action){
 		case "string":
 			displayOptions(action,"neutral");		
@@ -54,4 +101,5 @@ function filterActions(action){
 			executeAction(action);
 		break;
 	};
+	//if last action, do an advancement roll
 };
