@@ -4,6 +4,8 @@ const deepProgress = {
 	beginningTurn:true,
 	actionRoll: 0,
 	firstRollMod: 0, 
+	tokenRollMod: 0,
+	spookyRollMod: 0,
 	tokens: [],
 };
 

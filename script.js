@@ -86,15 +86,15 @@ function filterActions(action){
 	//if last action, do an advancement roll
 };
 
-function initializeMainRoll(){
+function initializeRoll(className,rollTable){
 
 	const mainRoll = document.getElementsByClassName("main-roll-display")[0];
 
-	function displayMainRollActions(){
-		deepTables[deepProgress.currentTable].table.forEach((action,i) => {
+	function displayRollActions(){
+		rollTable.table.forEach((action,i) => {
 
 		mainRoll.innerHTML +=
-			`<div class="main-roll-entry ${i + 1} border">
+			`<div class="${className} ${i + 1} border">
 					<div class="border">
 						<h2 class="number">${i + 1}</h2>
 					</div>
@@ -103,13 +103,13 @@ function initializeMainRoll(){
 				</div>`;
 		});
 	};
-  displayMainRollActions();
+  displayRollActions();
 
 	const mainTables = document.getElementsByClassName("main-table-display")[0];
 	mainTables.children[deepProgress.currentTable].classList.add("highlight");
 
 };
-initializeMainRoll();
+initializeRoll("main-roll-entry",deepTables[deepProgress.currentTable]);
 
 function detectRollClicked() {
 	const rollbutton = document.getElementsByClassName("main-header")[0];
@@ -124,7 +124,8 @@ function detectRollClicked() {
 	 deepProgress.actionRoll = currentActionRoll - 1;
 	 //change the main roll number in the header to match the roll
 	 const mainRollNumber = document.getElementsByClassName("main-roll-number")[0];
-	 mainRollNumber.firstElementChild.classList.add("highlight");
+	 mainRollNumber.firstElementChild.innerHTML = `${currentActionRoll}`;
+
 	});
 }
 detectRollClicked();
