@@ -25,7 +25,7 @@ function roll(multiplier){
 	//if both are truthy, add firstRollMod to the roll, converting 
 	//it to a ten if over ten
 	
-	return Math.floor(Math.random() * multiplier);
+	return Math.ceil(Math.random() * multiplier);
 };
 
 
@@ -87,30 +87,44 @@ function filterActions(action){
 };
 
 function initializeMainRoll(){
-	//read table one and display it on the DOM
-	//find the main roll element
-	const mainRoll = document.getElementsByClassName("main-roll-display")[0];
-	deepTables[deepProgress.currentTable].table.forEach((action,i) => {
-	//loop over the table to create the elements to fill it
 
-	mainRoll.innerHTML +=
-				`<div class="main-roll-entry ${i + 1} border">
-						<div class="border">
-						  <h2 class="number border">${i + 1}</h2>
-						</div>
-						<div class="border">
-						  <p class="description border">${getActionText(action)}</p>
-				  </div>`;
-	});
+	const mainRoll = document.getElementsByClassName("main-roll-display")[0];
+
+	function displayMainRollActions(){
+		deepTables[deepProgress.currentTable].table.forEach((action,i) => {
+
+		mainRoll.innerHTML +=
+			`<div class="main-roll-entry ${i + 1} border">
+					<div class="border">
+						<h2 class="number">${i + 1}</h2>
+					</div>
+					<div class="border">
+						<p class="description">${getActionText(action)}</p>
+				</div>`;
+		});
+	};
+  displayMainRollActions();
+
+	const mainTables = document.getElementsByClassName("main-table-display")[0];
+	mainTables.children[deepProgress.currentTable].classList.add("highlight");
+
 };
 initializeMainRoll();
 
 function detectRollClicked() {
 	const rollbutton = document.getElementsByClassName("main-header")[0];
 	rollbutton.addEventListener("click",event => {
-   console.log("roll: ",roll(10));				
 	 const uiActionList = document.getElementsByClassName("main-roll-entry"); 
+	 const currentActionRoll = roll(10);
 	 //highlight the action number affected, apply the class to it 
+	 uiActionList[deepProgress.actionRoll]
+			.firstElementChild.firstElementChild.classList.remove("highlight");
+	 uiActionList[currentActionRoll - 1]
+			.firstElementChild.firstElementChild.classList.add("highlight");
+	 deepProgress.actionRoll = currentActionRoll - 1;
+	 //change the main roll number in the header to match the roll
+	 const mainRollNumber = document.getElementsByClassName("main-roll-number")[0];
+	 mainRollNumber.firstElementChild.classList.add("highlight");
 	});
 }
 detectRollClicked();

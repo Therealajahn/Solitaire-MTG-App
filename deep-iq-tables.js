@@ -1,7 +1,8 @@
 const deepProgress = {
-	currentTable: 1,
+	currentTable: 2,
 	health: 40,  
 	beginningTurn:true,
+	actionRoll: 0,
 	firstRollMod: 0, 
 	tokens: [],
 };

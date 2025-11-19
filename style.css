@@ -9,6 +9,11 @@ body{
 	border: 3px solid white;
 }
 
+.highlight{
+	background: white;
+	color: black;
+}
+
 .main-roll{
 	height: 100vh;
 	width: 100vw;
@@ -63,3 +68,4 @@ body{
 .main-roll-entry > .description > p{
 	
 } 
+
