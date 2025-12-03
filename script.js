@@ -86,31 +86,43 @@ function filterActions(action){
 	//if last action, do an advancement roll
 };
 
-function initializeRoll(className,rollTable){
+function initializeRoll({
+	parentClass: parentClass,
+	className: className,
+	rollTable: rollTable,
+	entryTagOne: entryTagOne,
+	entryTagTwo: entryTagTwo
+}){
+	const parentElement = document.getElementsByClassName(`${parentClass}`)[0];
 
-	const mainRoll = document.getElementsByClassName("main-roll-display")[0];
+		rollTable.forEach((action,i) => {
 
-	function displayRollActions(){
-		rollTable.table.forEach((action,i) => {
-
-		mainRoll.innerHTML +=
+		parentElement.innerHTML +=
 			`<div class="${className} ${i + 1} border">
 					<div class="border">
-						<h2 class="number">${i + 1}</h2>
+						<${entryTagOne} class="number">${i + 1}</${entryTagOne}>
 					</div>
 					<div class="border">
-						<p class="description">${getActionText(action)}</p>
+						<${entryTagTwo} class="description">${getActionText(action)}</${entryTagTwo}>
 				</div>`;
 		});
-	};
-  displayRollActions();
-
-	const mainTables = document.getElementsByClassName("main-table-display")[0];
-	mainTables.children[deepProgress.currentTable].classList.add("highlight");
 
 };
-initializeRoll("main-roll-entry",deepTables[deepProgress.currentTable]);
-
+initializeRoll({
+	parentClass: "main-roll-display",
+	className: "main-roll-entry",
+	rollTable: deepTables[deepProgress.currentTable].table,
+	entryTagOne: "h2",
+	entryTagTwo: "p",
+});
+initializeRoll({
+	parentClass: "token-roll-display",
+	className: "token-roll-entry",
+	rollTable: deepTables.token,
+	entryTagOne: "p",
+	entryTagTwo: "p",
+});
+                 
 function detectRollClicked() {
 	const rollbutton = document.getElementsByClassName("main-header")[0];
 	rollbutton.addEventListener("click",event => {
