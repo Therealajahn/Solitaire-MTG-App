@@ -79,5 +79,6 @@ height: 90%;
 
 .token-roll-entry{
 	display: grid;	
-	grid-template-columns: 20% 80%;
+	grid-template-columns: 10% 90%;
+	font-size: x-small;
 }

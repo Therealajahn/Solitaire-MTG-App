@@ -3,6 +3,7 @@ const deepProgress = {
 	health: 40,  
 	beginningTurn:true,
 	actionRoll: 0,
+	tokenRoll: 0,
 	firstRollMod: 0, 
 	tokenRollMod: 0,
 	spookyRollMod: 0,

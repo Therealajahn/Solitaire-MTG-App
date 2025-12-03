@@ -122,22 +122,38 @@ initializeRoll({
 	entryTagOne: "p",
 	entryTagTwo: "p",
 });
-                 
-function detectRollClicked() {
-	const rollbutton = document.getElementsByClassName("main-header")[0];
+
+function detectRollClicked({
+	targetClass: targetClass,
+	targetEntryClass: targetEntryClass,
+	rollReference: rollReference,
+  rollUINumber: rollUINumber,
+}) {
+	const rollbutton = document.getElementsByClassName(`${targetClass}`)[0];
 	rollbutton.addEventListener("click",event => {
-	 const uiActionList = document.getElementsByClassName("main-roll-entry"); 
+	 const uiActionList = document.getElementsByClassName(`${targetEntryClass}`); 
 	 const currentActionRoll = roll(10);
 	 //highlight the action number affected, apply the class to it 
-	 uiActionList[deepProgress.actionRoll]
+	 uiActionList[rollReference]
 			.firstElementChild.firstElementChild.classList.remove("highlight");
 	 uiActionList[currentActionRoll - 1]
 			.firstElementChild.firstElementChild.classList.add("highlight");
-	 deepProgress.actionRoll = currentActionRoll - 1;
+	 rollReference = currentActionRoll - 1;
 	 //change the main roll number in the header to match the roll
-	 const mainRollNumber = document.getElementsByClassName("main-roll-number")[0];
+	 const mainRollNumber = document.getElementsByClassName(`${rollUINumber}`)[0];
 	 mainRollNumber.firstElementChild.innerHTML = `${currentActionRoll}`;
-
 	});
 }
-detectRollClicked();
+
+detectRollClicked({
+  targetClass: "main-header",
+	targetEntryClass: "main-roll-entry",
+	rollReference: deepProgress.actionRoll,
+	rollUINumber: "main-roll-number",
+});
+detectRollClicked({
+  targetClass: "token-header",
+	targetEntryClass: "token-roll-entry",
+	rollReference: deepProgress.tokenRoll,
+	rollUINumber: "token-roll-number",
+});
