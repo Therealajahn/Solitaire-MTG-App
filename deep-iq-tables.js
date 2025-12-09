@@ -1,8 +1,9 @@
 const deepProgress = {
-	currentTable: 2,
+	currentTable: 1,
 	health: 40,  
 	beginningTurn:true,
 	actionRoll: 0,
+	//advancementRoll: 0,
 	tokenRoll: 0,
 	firstRollMod: 0, 
 	tokenRollMod: 0,
@@ -11,7 +12,7 @@ const deepProgress = {
 };
 
 const deepTables = {
-	"1":{
+	"1":{   
 		table: [
 			"Do nothing",
 			"Do nothing",
@@ -40,32 +41,100 @@ const deepTables = {
 			{
 				type:"token",
 				text:"Put 2/2 creature into play",
-				baseStats:[2,2],
+				basestats:[2,2],
 				modifier: 0,
 			},
 			{
 				type:"token",
 				text:"Put 2/2 creature into play",
-				baseStats:[2,2],
+				basestats:[2,2],
 				modifier: 0,
 			},
 			{
 				type:"token",
 				text:"Put 2/2 creature into play",
-				baseStats:[2,2],
+				basestats:[2,2],
 				modifier: 0,
 			},
 			{
 				type:"advance",
-				text:"Move Deep IQ up to Table 4",
+				text:"Move deep iq up to table 4",
 				modifier: 2,
 			},
 			"Remove your best creature from the game (you decide)",
 			"Remove your best creature from the game (you decide)",
 		],
-		advancement: 9,
+		advancement: 8,
 	},
-
+//  Table III
+//
+//1-3) Do nothing.
+//4) Put a 2/2 token into play (+2).
+//5) Put a 2/1 token into play (+4).
+//6) Destroy your best land.
+//7) Move Deep IQ up to Table 5 and put a 1/1 token into play (+0).
+//8) Put a 1/1 token into play (+1) and Deep IQ gets a free roll on Table 2.
+	"3":{
+		table: [
+			//1
+			"Do nothing",
+			//2
+			"Do nothing",
+			//3
+			"Do nothing",
+			//4
+			{
+				type:"token",
+				text:"Put 2/2 creature into play",
+				basestats:[2,2],
+				modifier: 2,
+			},
+			//5
+			{
+				type:"token",
+				text:"Put 2/1 creature into play",
+				basestats:[2,1],
+				modifier: 4,
+			},
+			//6
+			"Destroy your best land",
+			//7
+			[
+				"and",
+				{
+					type:"advance",
+					text:"Move deep iq up to table 5",
+					modifier: 0,
+				},
+				{
+					type:"token",
+					text:"Put 2/1 creature into play",
+					basestats:[2,1],
+					modifier: 4,
+				},
+			],
+			//8
+			[
+				"and"
+				{
+					type:"advance",
+					text:"Move deep iq up to table 5",
+					modifier: 0,
+				},
+				{
+					type:"token",
+					text:"Put 2/1 creature into play",
+					basestats:[2,1],
+					modifier: 4,
+				},
+			],
+			//9
+			"Remove your best creature from the game (you decide)",
+			"Remove your best creature from the game (you decide)",
+		],
+		advancement: 8,
+	},
+   
 	token:[
 		"No extra abilities.",
 		"+1/+0 and flanking.",
