@@ -61,7 +61,7 @@
 //	//if last action, do an advancement roll
 //};
 
-function getActionText(action) {
+function filterActions(action) {
 	//TODO: Ill make a function that does the string object and array separation
 	let actionText = "";
 	switch(typeof action){
@@ -69,6 +69,9 @@ function getActionText(action) {
  			actionText = action;
     break;
 		case "object":
+			if(action instanceof Array){
+				return [];
+			}
 			actionText = action.text;
 		break;
 	};
@@ -88,13 +91,14 @@ function updateRollDisplay({
 
 		rollTable.forEach((action,i) => {
 
+	   let actionText = filterActions(action);
 		 entryString +=
 			`<div class="${className} ${i + 1} border">
 					<div class="border">
 						<${entryTagOne} class="number">${i + 1}</${entryTagOne}>
 					</div>
 					<div class="border">
-						<${entryTagTwo} class="description">${getActionText(action)}</${entryTagTwo}>
+						<${entryTagTwo} class="description">${actionText}</${entryTagTwo}>
 				</div>
 			</div>`;
 		});
@@ -116,19 +120,17 @@ updateRollDisplay({
 	entryTagOne: "p",
 	entryTagTwo: "p",
 });
+
 function advancementRoll(){
 	const currentRoll = roll(10);
-	const advancementUINumber = document.getElementsByClassName("tables-header")[0]
-		.children[1]; 
-	advancementUINumber.innerHTML = `${currentRoll}`;
-	const advancementTarget =  deepTables[deepProgress.currentTable].advancement;
 	const advancementRange = document.getElementById('advancement-range');
-	advancementRange.innerText =`Advancement Roll: 1-${advancementTarget}`;
+	const advancementTarget =  deepTables[deepProgress.currentTable].advancement;
+	advancementRange.children[0].innerText =`Advancement Roll: 1-${advancementTarget}`;
+	advancementRange.children[1].innerHTML = `${currentRoll}`;
 	//if advancement goes through, update the table display (highlight)
 	//...and clear advancement table display
 	//...and update advancement requirement display
 	if(currentRoll <= advancementTarget){
-	 deepProgress.currentTable += 1;
 	 const uiList = document.getElementsByClassName("tables-entry"); 
 
 	 if(deepProgress.currentTable > 1){
@@ -138,7 +140,7 @@ function advancementRoll(){
 
 	 uiList[deepProgress.currentTable - 1]
 			.classList.add("highlight");
-	 //deepProgress.advancementRoll = currentRoll - 1;
+	 deepProgress.advancementRoll = currentRoll;
 
 		updateRollDisplay({
 			parentClass: "main-roll-display",
@@ -147,6 +149,8 @@ function advancementRoll(){
 			entryTagOne: "h2",
 			entryTagTwo: "p",
 		});
+   //table update is delayed until next roll
+	 deepProgress.currentTable += 1;
 	};
 };
 
@@ -158,6 +162,7 @@ function detectRollClicked({
 	rollMax: rollMax,
 	callback: callback,
 }) {
+
 	const rollbutton = document.getElementsByClassName(`${targetClass}`)[0];
 	rollbutton.addEventListener("click",event => {
 	 const currentActionRoll = roll(rollMax);

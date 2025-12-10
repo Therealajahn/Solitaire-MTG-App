@@ -35,6 +35,14 @@ body{
 #advancement-range{
 	grid-area: advance;
 	justify-self: center;
+	width: 15rem;
+	display: grid;
+	grid-template-columns: 80% 20%;
+}
+
+#advancement-range > p{
+	margin: 0;
+	justify-self: center;
 }
 
 .main-roll-display{
@@ -52,18 +60,11 @@ body{
 }
 
 .tables-header{
-	display: grid;
-	grid-template-rows: 50% 50%;
 }
 
-.tables-header > h3{
-	margin-top: 2rem;
-	height: 0.2rem;
+tables-header > h3{
 }	
-.tables-header > h2{
-	justify-self: center;
-	margin-top: -0.05rem;
-}
+
 .tables-entry{
 	height: 100%;
 	width: 100%;

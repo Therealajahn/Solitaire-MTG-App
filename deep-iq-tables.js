@@ -66,14 +66,6 @@ const deepTables = {
 		],
 		advancement: 8,
 	},
-//  Table III
-//
-//1-3) Do nothing.
-//4) Put a 2/2 token into play (+2).
-//5) Put a 2/1 token into play (+4).
-//6) Destroy your best land.
-//7) Move Deep IQ up to Table 5 and put a 1/1 token into play (+0).
-//8) Put a 1/1 token into play (+1) and Deep IQ gets a free roll on Table 2.
 	"3":{
 		table: [
 			//1
@@ -99,6 +91,37 @@ const deepTables = {
 			//6
 			"Destroy your best land",
 			//7
+			{
+				doubleType: "and",
+				actionOne: {
+					type:"advance",
+					text:"Move deep iq up to table 5",
+					modifier: 0,
+				},
+				actionTwo: {
+					type:"token",
+					text:"Put 2/1 creature into play",
+					basestats:[2,1],
+					modifier: 4,
+				},
+			},
+			//8
+			[
+				"and",
+				{
+					type:"token",
+					text:"Put 1/1 token into play",
+					modifier: 1,
+				},
+				{
+					type:"free-roll",
+					text:"Free roll on Table 2",
+					modifier: 0,
+				},
+			],
+			//9
+			"Remove your best creature from the game (you decide)",
+			//10
 			[
 				"and",
 				{
@@ -113,26 +136,9 @@ const deepTables = {
 					modifier: 4,
 				},
 			],
-			//8
-			[
-				"and"
-				{
-					type:"advance",
-					text:"Move deep iq up to table 5",
-					modifier: 0,
-				},
-				{
-					type:"token",
-					text:"Put 2/1 creature into play",
-					basestats:[2,1],
-					modifier: 4,
-				},
-			],
-			//9
-			"Remove your best creature from the game (you decide)",
-			"Remove your best creature from the game (you decide)",
+
 		],
-		advancement: 8,
+		advancement: 7,
 	},
    
 	token:[
