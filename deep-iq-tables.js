@@ -92,13 +92,14 @@ const deepTables = {
 			"Destroy your best land",
 			//7
 			{
-				doubleType: "and",
-				actionOne: {
+				type:"more",
+				moreType: "and",
+				one: {
 					type:"advance",
 					text:"Move deep iq up to table 5",
 					modifier: 0,
 				},
-				actionTwo: {
+				two: {
 					type:"token",
 					text:"Put 2/1 creature into play",
 					basestats:[2,1],
@@ -106,19 +107,20 @@ const deepTables = {
 				},
 			},
 			//8
-			[
-				"and",
-				{
+			{
+				type:"more",
+				moreType: "and",
+				one: {
 					type:"token",
 					text:"Put 1/1 token into play",
 					modifier: 1,
 				},
-				{
+				two: {
 					type:"free-roll",
 					text:"Free roll on Table 2",
 					modifier: 0,
 				},
-			],
+			},
 			//9
 			"Remove your best creature from the game (you decide)",
 			//10

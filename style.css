@@ -59,6 +59,22 @@ body{
 	align-items: center;
 }
 
+.main-roll-list{
+	width: 90%;
+	height: 90%;
+	list-style: none;
+}
+
+.main-roll-entry{
+	display:grid;
+	grid-template-columns: 20% 80%;
+}
+
+.more-main-roll-entry{
+	display:grid;
+	grid-template-columns: 20% 40%;
+}
+
 .tables-header{
 }
 
@@ -73,16 +89,6 @@ tables-header > h3{
   align-items: center;
 }
 
-.main-roll-list{
-width: 90%;
-height: 90%;
-	list-style: none;
-}
-
-.main-roll-entry{
-	display:grid;
-	grid-template-columns: 20% 80%;
-}
 
 .token-roll{
 	height: 100vh;

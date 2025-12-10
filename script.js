@@ -63,16 +63,17 @@
 
 function filterActions(action) {
 	//TODO: Ill make a function that does the string object and array separation
-	let actionText = "";
+	let actionText = null;
 	switch(typeof action){
 		case "string":
  			actionText = action;
     break;
 		case "object":
-			if(action instanceof Array){
-				return [];
-			}
-			actionText = action.text;
+			if(action.type === "more"){
+				actionText = [action.one.type,action.two.type];
+				break;
+			};
+		  actionText = action.text;
 		break;
 	};
 
@@ -92,7 +93,8 @@ function updateRollDisplay({
 		rollTable.forEach((action,i) => {
 
 	   let actionText = filterActions(action);
-		 entryString +=
+		 let currentEntry = "";
+		 const standardEntry =
 			`<div class="${className} ${i + 1} border">
 					<div class="border">
 						<${entryTagOne} class="number">${i + 1}</${entryTagOne}>
@@ -101,6 +103,21 @@ function updateRollDisplay({
 						<${entryTagTwo} class="description">${actionText}</${entryTagTwo}>
 				</div>
 			</div>`;
+  	 const moreEntry =
+			`<div class="more ${className} ${i + 1} border">
+					<div class="border">
+						<p class="number">${i + 1}</p>
+					</div>
+					<div class="border">
+						<p class="description">${actionText}</p>
+				</div>
+			</div>`;
+		 if(Array.isArray(actionText)){
+			entryString += moreEntry;
+			return;
+		 };
+
+		 entryString += standardEntry;
 		});
 	 parentElement.innerHTML = entryString;
 };
