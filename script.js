@@ -151,7 +151,7 @@ function advancementRoll(){
 	 const uiList = document.getElementsByClassName("tables-entry"); 
 
 	 if(deepProgress.currentTable > 1){
-		 uiList[deepProgress.currentTable - 2]
+		 uiList[deepProgress.advancementRoll]
 				.classList.remove("highlight");
 	 };
 
@@ -168,6 +168,7 @@ function advancementRoll(){
 		});
    //table update is delayed until next roll
 	 deepProgress.currentTable += 1;
+	 deepProgress.advancementRoll = currentRoll;
 	};
 };
 
@@ -179,7 +180,6 @@ function detectRollClicked({
 	rollMax: rollMax,
 	callback: callback,
 }) {
-
 	const rollbutton = document.getElementsByClassName(`${targetClass}`)[0];
 	rollbutton.addEventListener("click",event => {
 	 const currentActionRoll = roll(rollMax);
