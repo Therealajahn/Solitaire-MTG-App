@@ -151,7 +151,7 @@ function advancementRoll(){
 	 const uiList = document.getElementsByClassName("tables-entry"); 
 
 	 if(deepProgress.currentTable > 1){
-		 uiList[deepProgress.advancementRoll]
+		 uiList[deepProgress.currentTable - 2]
 				.classList.remove("highlight");
 	 };
 
@@ -168,7 +168,6 @@ function advancementRoll(){
 		});
    //table update is delayed until next roll
 	 deepProgress.currentTable += 1;
-	 deepProgress.advancementRoll = currentRoll;
 	};
 };
 
@@ -196,7 +195,7 @@ function detectRollClicked({
 	 const mainRollNumber = document.getElementsByClassName(`${rollUINumber}`)[0];
 	 mainRollNumber.firstElementChild.innerHTML = `${currentActionRoll}`;
 
-	 if(callback){callback()};
+	 //if(callback){callback()};
 	});
 }
 
@@ -220,6 +219,6 @@ function roll(multiplier){
 	//needs to check beginningTurn  and firstRollMod  
 	//if both are truthy, add firstRollMod to the roll, converting 
 	//it to a ten if over ten
-	
+	           
 	return Math.ceil(Math.random() * multiplier);
 };
